@@ -70,7 +70,7 @@ class _FourHandClockState extends State<FourHandClock>
                           )
                         ],
                       ),
-                      const SizedBox(height: 64),
+                      const SizedBox(height: 32),
                       ClockPage(size: clockSize),
                     ],
                   );

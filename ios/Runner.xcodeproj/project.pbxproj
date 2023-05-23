@@ -472,7 +472,7 @@
 				DEVELOPMENT_TEAM = 88JMYVVGNH;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = Runner/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = "Pace Clock";
+				INFOPLIST_KEY_CFBundleDisplayName = "4 Hand Pace Clock";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -655,7 +655,7 @@
 				DEVELOPMENT_TEAM = 88JMYVVGNH;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = Runner/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = "Pace Clock";
+				INFOPLIST_KEY_CFBundleDisplayName = "4 Hand Pace Clock";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -680,7 +680,7 @@
 				DEVELOPMENT_TEAM = 88JMYVVGNH;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = Runner/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = "Pace Clock";
+				INFOPLIST_KEY_CFBundleDisplayName = "4 Hand Pace Clock";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

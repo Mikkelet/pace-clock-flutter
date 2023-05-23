@@ -33,6 +33,11 @@ class MenuDrawer extends StatelessWidget {
                 onChanged: (value) {
                   sharedPrefs.runInBackground = value ?? true;
                 }),
+            const SizedBox(height: 64),
+            const Text(
+              "Made by Mikkel Thygesen in 🇩🇰",
+              style: TextStyle(color: Colors.grey),
+            )
           ],
         ),
       ),
