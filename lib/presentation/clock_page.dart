@@ -51,7 +51,7 @@ class ClockPainter extends FourHandClockPainter {
   void paint(Canvas canvas, Size size) {
     final paint1 = Paint()
       ..color = ringColor
-      ..strokeWidth = 3
+      ..strokeWidth = 2
       ..style = PaintingStyle.stroke;
     canvas.drawCircle(dimensions.offset, dimensions.circumference, paint1);
   }
