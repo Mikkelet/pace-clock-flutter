@@ -2,8 +2,9 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_beep/flutter_beep.dart';
-import 'package:four_hand_clock_app/clock_dimensions.dart';
-import 'package:four_hand_clock_app/clock_painter.dart';
+import 'package:four_hand_clock_app/presentation/clock_dimensions.dart';
+import 'package:four_hand_clock_app/presentation/clock_painter.dart';
+import 'package:four_hand_clock_app/presentation/themes/ClockTheme.dart';
 
 class HandView extends StatefulWidget {
   final ClockDimensions dimensions;
@@ -32,7 +33,10 @@ class _HandViewState extends State<HandView> {
   Widget build(BuildContext context) {
     return CustomPaint(
       painter: HandsPainter(
-          rotation: rotation, dimens: widget.dimensions, color: widget.color),
+          rotation: rotation,
+          dimens: widget.dimensions,
+          handColor: widget.color,
+          coverColor: Theme.of(context).colorScheme.cover),
     );
   }
 
@@ -58,18 +62,20 @@ class _HandViewState extends State<HandView> {
 class HandsPainter extends FourHandClockPainter {
   final ClockDimensions dimens;
   final double rotation;
-  final Color color;
+  final Color handColor;
+  final Color coverColor;
 
   HandsPainter({
     required this.rotation,
     required this.dimens,
-    required this.color,
+    required this.handColor,
+    required this.coverColor,
   }) : super();
 
   @override
   void paint(Canvas canvas, Size size) {
     final hand1 = Paint()
-      ..color = color
+      ..color = handColor
       ..strokeWidth = 5
       ..style = PaintingStyle.fill;
     rotateLine(canvas, dimens.offset, rotation);
@@ -77,7 +83,7 @@ class HandsPainter extends FourHandClockPainter {
         dimens.offset, Offset(dimens.circumference, dimens.y), hand1);
 
     final cover = Paint()
-      ..color = Colors.white
+      ..color = coverColor
       ..style = PaintingStyle.fill;
     canvas.drawCircle(dimens.offset, dimens.circumference * 0.1, cover);
   }

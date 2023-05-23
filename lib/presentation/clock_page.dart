@@ -1,12 +1,13 @@
-
 import 'package:flutter/material.dart';
-import 'package:four_hand_clock_app/clock_dimensions.dart';
-import 'package:four_hand_clock_app/clock_intervals_view.dart';
-import 'package:four_hand_clock_app/clock_painter.dart';
-import 'package:four_hand_clock_app/hands_view.dart';
+import 'package:four_hand_clock_app/presentation/clock_dimensions.dart';
+import 'package:four_hand_clock_app/presentation/clock_intervals_view.dart';
+import 'package:four_hand_clock_app/presentation/clock_painter.dart';
+import 'package:four_hand_clock_app/presentation/hands_view.dart';
+import 'package:four_hand_clock_app/presentation/themes/ClockTheme.dart';
 
 class ClockPage extends StatelessWidget {
   final double size;
+
   const ClockPage({Key? key, required this.size}) : super(key: key);
 
   @override
@@ -18,7 +19,8 @@ class ClockPage extends StatelessWidget {
       child: Column(
         children: [
           CustomPaint(
-            painter: ClockPainter(dimensions),
+            painter: ClockPainter(
+                dimensions, Theme.of(context).colorScheme.ringColor),
           ),
           ClockIntervalsView(dimensions),
           HandView(
@@ -41,13 +43,14 @@ class ClockPage extends StatelessWidget {
 
 class ClockPainter extends FourHandClockPainter {
   final ClockDimensions dimensions;
+  final Color ringColor;
 
-  ClockPainter(this.dimensions);
+  ClockPainter(this.dimensions, this.ringColor);
 
   @override
   void paint(Canvas canvas, Size size) {
     final paint1 = Paint()
-      ..color = const Color(0xff63aa65)
+      ..color = ringColor
       ..strokeWidth = 3
       ..style = PaintingStyle.stroke;
     canvas.drawCircle(dimensions.offset, dimensions.circumference, paint1);

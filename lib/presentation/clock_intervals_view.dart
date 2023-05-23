@@ -1,8 +1,9 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
-import 'package:four_hand_clock_app/clock_dimensions.dart';
-import 'package:four_hand_clock_app/clock_painter.dart';
+import 'package:four_hand_clock_app/presentation/clock_dimensions.dart';
+import 'package:four_hand_clock_app/presentation/clock_painter.dart';
+import 'package:four_hand_clock_app/presentation/themes/ClockTheme.dart';
 
 class ClockIntervalsView extends StatelessWidget {
   final ClockDimensions dimensions;
@@ -12,18 +13,27 @@ class ClockIntervalsView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CustomPaint(
-      painter: IntervalsPainter(dimensions),
+      painter: IntervalsPainter(
+        dimensions,
+        backgroundColor: Theme.of(context).colorScheme.background,
+        minuteColor: Theme.of(context).colorScheme.minuteColor,
+        hourColor: Theme.of(context).colorScheme.hourColor,
+
+      ),
     );
   }
 }
 
 class IntervalsPainter extends FourHandClockPainter {
   final ClockDimensions dimensions;
+  final Color backgroundColor;
+  final Color minuteColor;
+  final Color hourColor;
 
   static const fraction = 1 / 60;
   static const rotation = (2 * pi) * fraction;
 
-  IntervalsPainter(this.dimensions) : super();
+  IntervalsPainter(this.dimensions, {required this.backgroundColor, required this.minuteColor, required this.hourColor}) : super();
 
   @override
   void paint(Canvas canvas, Size size) {
@@ -32,11 +42,11 @@ class IntervalsPainter extends FourHandClockPainter {
       if ((i + 1) % 5 == 0) {
         paint.strokeWidth = 2;
         paint.style = PaintingStyle.fill;
-        paint.color = Colors.black;
+        paint.color = hourColor;
       } else {
         paint.strokeWidth = 1;
         paint.style = PaintingStyle.fill;
-        paint.color = Colors.red;
+        paint.color = minuteColor;
       }
       rotateLine(canvas, dimensions.offset, rotation);
       canvas.drawLine(dimensions.offset,
@@ -44,7 +54,7 @@ class IntervalsPainter extends FourHandClockPainter {
     }
 
     final bg = Paint()
-      ..color = Colors.white
+      ..color = backgroundColor
       ..style = PaintingStyle.fill;
     canvas.drawCircle(dimensions.offset, dimensions.circumference * 0.8, bg);
   }

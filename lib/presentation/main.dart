@@ -1,7 +1,8 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
-import 'package:four_hand_clock_app/clock_page.dart';
+import 'package:four_hand_clock_app/presentation/clock_page.dart';
+import 'package:four_hand_clock_app/presentation/themes/ClockTheme.dart';
 
 void main() {
   runApp(const FourHandClock());
@@ -19,13 +20,15 @@ class FourHandClock extends StatelessWidget {
 
     return MaterialApp(
       title: 'Four hand clock',
+      darkTheme:
+          ThemeData(colorScheme: const ClockTheme.dark(), useMaterial3: true),
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        colorScheme: const ClockTheme(),
         useMaterial3: true,
       ),
       home: Scaffold(
-          body: Center(
-              child: ClockPage(size: clockSize))),
+        body: Center(child: ClockPage(size: clockSize)),
+      ),
     );
   }
 }
