@@ -1,37 +1,48 @@
+
 import 'package:flutter/material.dart';
+import 'package:four_hand_clock_app/clock_dimensions.dart';
 import 'package:four_hand_clock_app/clock_intervals_view.dart';
+import 'package:four_hand_clock_app/clock_painter.dart';
 import 'package:four_hand_clock_app/hands_view.dart';
 
 class ClockPage extends StatelessWidget {
-  const ClockPage({Key? key}) : super(key: key);
+  final double size;
+  const ClockPage({Key? key, required this.size}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final circ = (MediaQuery.of(context).size.width - 10) / 2;
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text("Four hand clock"),
-      ),
-      body: Column(
+    final dimensions = ClockDimensions(0, size / 2, size / 2);
+    return SizedBox(
+      width: size,
+      height: size,
+      child: Column(
         children: [
           CustomPaint(
-            painter: ClockPainter(circ),
+            painter: ClockPainter(dimensions),
           ),
-          ClockIntervalsView(circ),
-          HandView(circ, offsetSeconds: 0, color: Colors.red,),
-          HandView(circ, offsetSeconds: 15, color: Colors.blue,),
-          HandView(circ, offsetSeconds: 30, color: Colors.yellow),
-          HandView(circ, offsetSeconds: 45, color: Colors.greenAccent),
+          ClockIntervalsView(dimensions),
+          HandView(
+            dimensions,
+            offsetSeconds: 0,
+            color: Colors.red,
+          ),
+          HandView(
+            dimensions,
+            offsetSeconds: 15,
+            color: Colors.blue,
+          ),
+          HandView(dimensions, offsetSeconds: 30, color: Colors.yellow),
+          HandView(dimensions, offsetSeconds: 45, color: Colors.greenAccent),
         ],
       ),
     );
   }
 }
 
-class ClockPainter extends CustomPainter {
-  final double circ;
+class ClockPainter extends FourHandClockPainter {
+  final ClockDimensions dimensions;
 
-  ClockPainter(this.circ);
+  ClockPainter(this.dimensions);
 
   @override
   void paint(Canvas canvas, Size size) {
@@ -39,11 +50,6 @@ class ClockPainter extends CustomPainter {
       ..color = const Color(0xff63aa65)
       ..strokeWidth = 3
       ..style = PaintingStyle.stroke;
-      canvas.drawCircle(const Offset(200, 200), circ, paint1);
-  }
-
-  @override
-  bool shouldRepaint(covariant CustomPainter oldDelegate) {
-    return true;
+    canvas.drawCircle(dimensions.offset, dimensions.circumference, paint1);
   }
 }

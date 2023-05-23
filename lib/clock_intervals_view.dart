@@ -1,58 +1,51 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:four_hand_clock_app/clock_dimensions.dart';
+import 'package:four_hand_clock_app/clock_painter.dart';
 
 class ClockIntervalsView extends StatelessWidget {
-  final double circ;
+  final ClockDimensions dimensions;
 
-  const ClockIntervalsView(this.circ, {Key? key}) : super(key: key);
+  const ClockIntervalsView(this.dimensions, {Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return CustomPaint(
-      painter: IntervalsPainter(circ),
+      painter: IntervalsPainter(dimensions),
     );
   }
 }
 
-class IntervalsPainter extends CustomPainter {
-  final double circ;
+class IntervalsPainter extends FourHandClockPainter {
+  final ClockDimensions dimensions;
 
-  IntervalsPainter(this.circ);
+  static const fraction = 1 / 60;
+  static const rotation = (2 * pi) * fraction;
+
+  IntervalsPainter(this.dimensions) : super();
 
   @override
   void paint(Canvas canvas, Size size) {
     for (int i = 0; i < 60; i++) {
-      const fraction = 1 / 60;
-      const x = (2 * pi) * fraction;
-      final interval = Paint();
+      final paint = Paint();
       if ((i + 1) % 5 == 0) {
-        interval.strokeWidth = 2;
-        interval.style = PaintingStyle.fill;
-        interval.color = Colors.black;
+        paint.strokeWidth = 2;
+        paint.style = PaintingStyle.fill;
+        paint.color = Colors.black;
       } else {
-        interval.strokeWidth = 1;
-        interval.style = PaintingStyle.fill;
-        interval.color = Colors.red;
+        paint.strokeWidth = 1;
+        paint.style = PaintingStyle.fill;
+        paint.color = Colors.red;
       }
-      rotate(canvas, 200, 200, x);
-      canvas.drawLine(Offset(circ * 2, 200), const Offset(200, 200), interval);
+      rotateLine(canvas, dimensions.offset, rotation);
+      canvas.drawLine(dimensions.offset,
+          Offset(dimensions.circumference, dimensions.y), paint);
     }
 
     final bg = Paint()
       ..color = Colors.white
       ..style = PaintingStyle.fill;
-    canvas.drawCircle(const Offset(200, 200), circ * 0.8, bg);
-  }
-
-  void rotate(Canvas canvas, double cx, double cy, double rotation) {
-    canvas.translate(cx, cy);
-    canvas.rotate(rotation);
-    canvas.translate(-cx, -cy);
-  }
-
-  @override
-  bool shouldRepaint(covariant CustomPainter oldDelegate) {
-    return true;
+    canvas.drawCircle(dimensions.offset, dimensions.circumference * 0.8, bg);
   }
 }

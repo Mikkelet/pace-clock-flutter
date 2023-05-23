@@ -1,13 +1,15 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:four_hand_clock_app/clock_dimensions.dart';
+import 'package:four_hand_clock_app/clock_painter.dart';
 
 class HandView extends StatefulWidget {
-  final double circ;
+  final ClockDimensions dimensions;
   final Color color;
   final double offsetSeconds;
 
-  const HandView(this.circ,
+  const HandView(this.dimensions,
       {Key? key, this.offsetSeconds = 0, this.color = Colors.red})
       : super(key: key);
 
@@ -28,7 +30,7 @@ class _HandViewState extends State<HandView> {
   Widget build(BuildContext context) {
     return CustomPaint(
       painter: HandsPainter(
-          rotation: rotation, circ: widget.circ, color: widget.color),
+          rotation: rotation, dimens: widget.dimensions, color: widget.color),
     );
   }
 
@@ -47,16 +49,16 @@ class _HandViewState extends State<HandView> {
   }
 }
 
-class HandsPainter extends CustomPainter {
+class HandsPainter extends FourHandClockPainter {
+  final ClockDimensions dimens;
   final double rotation;
-  final double circ;
   final Color color;
 
   HandsPainter({
     required this.rotation,
-    required this.circ,
+    required this.dimens,
     required this.color,
-  });
+  }) : super();
 
   @override
   void paint(Canvas canvas, Size size) {
@@ -64,24 +66,12 @@ class HandsPainter extends CustomPainter {
       ..color = color
       ..strokeWidth = 5
       ..style = PaintingStyle.fill;
-    rotate(canvas, 200, 200);
-    canvas.drawLine(
-        Offset((circ * 2) * 0.9, 100), const Offset(200, 200), hand1);
+    rotateLine(canvas, dimens.offset, rotation);
+    canvas.drawLine(dimens.offset, Offset(dimens.circumference, dimens.y), hand1);
 
     final cover = Paint()
       ..color = Colors.white
       ..style = PaintingStyle.fill;
-    canvas.drawCircle(const Offset(200, 200), circ * 0.05, cover);
-  }
-
-  void rotate(Canvas canvas, double cx, double cy) {
-    canvas.translate(cx, cy);
-    canvas.rotate(rotation);
-    canvas.translate(-cx, -cy);
-  }
-
-  @override
-  bool shouldRepaint(covariant CustomPainter oldDelegate) {
-    return true;
+    canvas.drawCircle(dimens.offset, dimens.circumference * 0.1, cover);
   }
 }
