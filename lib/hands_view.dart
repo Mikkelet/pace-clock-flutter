@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_beep/flutter_beep.dart';
 import 'package:four_hand_clock_app/clock_dimensions.dart';
 import 'package:four_hand_clock_app/clock_painter.dart';
 
@@ -18,6 +19,7 @@ class HandView extends StatefulWidget {
 }
 
 class _HandViewState extends State<HandView> {
+  bool playBeep = true;
   double rotation = 0;
 
   @override
@@ -40,6 +42,10 @@ class _HandViewState extends State<HandView> {
     final millis = now.millisecond / 1000;
     final secondsWithMillis = second + millis;
     const rotationPrSecond = (2 * pi) / 60;
+
+    if ((now.second + widget.offsetSeconds) % 60 == 0) {
+      FlutterBeep.beep();
+    }
     setState(() {
       rotation = rotationPrSecond * secondsWithMillis;
     });
@@ -67,7 +73,8 @@ class HandsPainter extends FourHandClockPainter {
       ..strokeWidth = 5
       ..style = PaintingStyle.fill;
     rotateLine(canvas, dimens.offset, rotation);
-    canvas.drawLine(dimens.offset, Offset(dimens.circumference, dimens.y), hand1);
+    canvas.drawLine(
+        dimens.offset, Offset(dimens.circumference, dimens.y), hand1);
 
     final cover = Paint()
       ..color = Colors.white
