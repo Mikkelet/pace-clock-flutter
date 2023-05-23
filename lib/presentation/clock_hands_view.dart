@@ -1,7 +1,7 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_beep/flutter_beep.dart';
+import 'package:four_hand_clock_app/data/pace_clock_beeper.dart';
 import 'package:four_hand_clock_app/presentation/clock_dimensions.dart';
 import 'package:four_hand_clock_app/presentation/clock_painter.dart';
 import 'package:four_hand_clock_app/presentation/themes/ClockTheme.dart';
@@ -48,7 +48,7 @@ class _HandViewState extends State<HandView> {
     const rotationPrSecond = (2 * pi) / 60;
 
     if ((now.second + widget.offsetSeconds) % 60 == 0) {
-      FlutterBeep.beep();
+      PaceClockBeeper.playBeep();
     }
     setState(() {
       rotation = rotationPrSecond * secondsWithMillis;

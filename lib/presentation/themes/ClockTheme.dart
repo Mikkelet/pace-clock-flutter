@@ -8,7 +8,7 @@ class ClockTheme extends ColorScheme {
             brightness: Brightness.light,
             secondary: Colors.green,
             tertiary: Colors.yellow,
-            primary: Colors.red,
+            primary: Colors.blueAccent,
             onBackground: Colors.black,
             error: Colors.redAccent,
             onError: Colors.black,
@@ -23,12 +23,12 @@ class ClockTheme extends ColorScheme {
             brightness: Brightness.dark,
             secondary: Colors.green,
             tertiary: Colors.yellow,
-            primary: Colors.red,
+            primary: Colors.blueAccent,
             onBackground: Colors.white,
             error: Colors.redAccent,
             onError: Colors.black,
             onPrimary: Colors.black,
-            onSurface: Colors.black,
+            onSurface: Colors.white,
             onSecondary: Colors.black);
 }
 

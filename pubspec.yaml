@@ -31,6 +31,7 @@ dependencies:
   flutter:
     sdk: flutter
   flutter_beep: ^1.0.0
+  shared_preferences: ^2.1.1
 
 
   # The following adds the Cupertino Icons font to your application.

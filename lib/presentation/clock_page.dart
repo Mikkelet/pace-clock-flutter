@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:four_hand_clock_app/presentation/clock_dimensions.dart';
 import 'package:four_hand_clock_app/presentation/clock_intervals_view.dart';
 import 'package:four_hand_clock_app/presentation/clock_painter.dart';
-import 'package:four_hand_clock_app/presentation/hands_view.dart';
+import 'package:four_hand_clock_app/presentation/clock_hands_view.dart';
 import 'package:four_hand_clock_app/presentation/themes/ClockTheme.dart';
 
 class ClockPage extends StatelessWidget {
