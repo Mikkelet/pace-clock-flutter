@@ -1,4 +1,4 @@
-package com.example.four_hand_clock_app
+package com.mikkelthygesen.four_hand_clock_app
 
 import io.flutter.embedding.android.FlutterActivity
 

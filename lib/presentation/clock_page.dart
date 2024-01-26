@@ -33,8 +33,16 @@ class ClockPage extends StatelessWidget {
             offsetSeconds: 15,
             color: Colors.blue,
           ),
-          HandView(dimensions, offsetSeconds: 30, color: Colors.yellow),
-          HandView(dimensions, offsetSeconds: 45, color: Colors.greenAccent),
+          HandView(
+            dimensions,
+            offsetSeconds: 30,
+            color: Colors.yellow,
+          ),
+          HandView(
+            dimensions,
+            offsetSeconds: 45,
+            color: Colors.greenAccent,
+          ),
         ],
       ),
     );

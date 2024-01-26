@@ -11,9 +11,12 @@ class HandView extends StatefulWidget {
   final Color color;
   final double offsetSeconds;
 
-  const HandView(this.dimensions,
-      {Key? key, this.offsetSeconds = 0, this.color = Colors.red})
-      : super(key: key);
+  const HandView(
+    this.dimensions, {
+    Key? key,
+    this.offsetSeconds = 0,
+    this.color = Colors.red,
+  }) : super(key: key);
 
   @override
   State<HandView> createState() => _HandViewState();

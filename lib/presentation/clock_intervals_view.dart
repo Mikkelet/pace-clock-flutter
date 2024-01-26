@@ -18,7 +18,6 @@ class ClockIntervalsView extends StatelessWidget {
         backgroundColor: Theme.of(context).colorScheme.background,
         minuteColor: Theme.of(context).colorScheme.minuteColor,
         hourColor: Theme.of(context).colorScheme.hourColor,
-
       ),
     );
   }
@@ -33,7 +32,12 @@ class IntervalsPainter extends FourHandClockPainter {
   static const fraction = 1 / 60;
   static const rotation = (2 * pi) * fraction;
 
-  IntervalsPainter(this.dimensions, {required this.backgroundColor, required this.minuteColor, required this.hourColor}) : super();
+  IntervalsPainter(
+    this.dimensions, {
+    required this.backgroundColor,
+    required this.minuteColor,
+    required this.hourColor,
+  }) : super();
 
   @override
   void paint(Canvas canvas, Size size) {
